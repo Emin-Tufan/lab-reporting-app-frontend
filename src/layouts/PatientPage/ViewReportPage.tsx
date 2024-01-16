@@ -5,6 +5,7 @@ import ReportDetailModel from "../../models/ReportDetailModel";
 import { Link } from "react-router-dom";
 import DetailModal from "../ManagerPage/DetailModal";
 import { ReportRequestModal } from "./ReportRequestModal";
+import ImageModal from "../ManagerPage/ImageModal";
 
 export const ViewReportPage = () => {
     const [report, setReport] = useState<ReportDetailModel[]>([]);
@@ -147,14 +148,12 @@ export const ViewReportPage = () => {
                                     </td>
                                     <td>
                                         {report.reportImage && (
-                                            <Link
-                                                className="link-primary"
-                                                onClick={() => openImageInNewTab(report.reportImage)}
-                                                to={""}
-                                            >
+                                            <Link className="link-primary" data-bs-toggle="modal"
+                                                data-bs-target={`#showImage${report.reportId}`} to={""} >
                                                 Report Image
                                             </Link>
                                         )}
+                                        <ImageModal image={report.reportImage} id={report.reportId} />
                                     </td>
                                     <td>{report.issueDate}</td>
                                 </tr>

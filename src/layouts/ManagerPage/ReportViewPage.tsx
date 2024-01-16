@@ -6,6 +6,7 @@ import { DetailModal } from "./DetailModal";
 import { jwtDecode } from "jwt-decode";
 import { UpdateModal } from "./UpdateModal";
 import DeleteModal from "./DeleteModal";
+import ImageModal from "./ImageModal";
 
 
 const ReportReviewPage = () => {
@@ -56,11 +57,6 @@ const ReportReviewPage = () => {
             console.log(error.message);
         }
     }
-
-
-    const openImageInNewTab = (image: any) => {
-        window.open(image, '_blank');
-    };
 
     const confirmDelete = async () => {
         if (!selectedReport) return;
@@ -202,10 +198,12 @@ const ReportReviewPage = () => {
                                 </td>
                                 <td>
                                     {report.reportImage && (
-                                        <Link className="link-primary" onClick={() => openImageInNewTab(report.reportImage)} to={""}>
+                                        <Link className="link-primary" data-bs-toggle="modal"
+                                            data-bs-target={`#showImage${report.reportId}`} to={""} >
                                             Report Image
                                         </Link>
                                     )}
+                                    <ImageModal image={report.reportImage} id={report.reportId} />
                                 </td>
                                 <td>{report.issueDate}</td>
                                 <td>
